@@ -7,7 +7,7 @@
 > `make verify` sẽ fail nếu còn placeholder chưa điền. Đó là cố ý.
 
 **Họ Tên:** Hoàng Hương Giang
-**Cohort:** Track 2
+**Cohort:** Track 2 - K3B
 **Ngày submit:** 2026-08-20
 
 ---
@@ -91,7 +91,8 @@ chạy): 3.82 / 4 slots
 - llm: 8218.9 ms
 - **stage chiếm nhiều nhất:** llm (100.0% của total)
 
-**Reflection** (≤ 60 chữ): Giai đoạn tốn thời gian nhất là LLM generation (8.2s, 100%), đúng kỳ vọng vì retrieval chỉ là so khớp từ khóa in-memory, còn LLM inference trên CPU phải prefill context và sinh token. Nếu cần giảm 2x độ trễ, tôi sẽ dùng Prompt Caching cho context cố định và lượng tử hóa KV cache.
+**Reflection** (≤ 60 chữ): Giai đoạn chiếm nhiều thời gian là LLM generation. Kết quả này khớp với kỳ vọng vì retrieval là in-memory search nhanh, LLM inference trên CPU lại phải prefill context dài và sinh token tự hồi quy.
+Để giảm một nửa độ trễn, tôi sẽ áp dụng Prompt Caching cho system prompt/context cố định, lượng tử háo KV cache, chạy ở số thread tối ưu là 2 luồng.
 
 ---
 
@@ -140,7 +141,7 @@ speedup:
 
 ## 7. Điều làm bạn ngạc nhiên nhất  *(optional)*
 
-Điều làm tôi ngạc nhiên nhất là việc tăng số luồng CPU (threads) quá nhiều không giúp mô hình chạy nhanh hơn mà ngược lại làm tốc độ tụt hơn 9 lần do bị nghẽn băng thông bộ nhớ và tranh chấp cache L3.
+Điều làm tôi ngạc nhiên nhất là việc tăng số luồng lên không giúp mô hình chạy nhanh hơn mà ngược lại làm tốc độ chậm đi nhiều lần.
 
 ---
 
