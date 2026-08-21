@@ -45,4 +45,4 @@ Khai báo các thành phần trong Pipeline:
 - **N19 Vector + features:** Stub (sử dụng thuật toán so khớp từ khóa keyword overlap)
 - **N20 Serving:** **Real** (`llama-server` thật phục vụ mô hình Qwen3.5 0.8B)
 Giai đoạn chiếm nhiều thời gian là LLM generation. Kết quả này khớp với kỳ vọng vì retrieval là in-memory search nhanh, LLM inference trên CPU lại phải prefill context dài và sinh token tự hồi quy.
-Nếu giảm một nửa độ trễn, tôi sẽ áp dụng Prompt Caching cho system prompt/context cố định, lượng tử háo KV cache, chạy ở số thread tối ưu là 2 lu
+Để giảm một nửa độ trễn, tôi sẽ áp dụng Prompt Caching cho system prompt/context cố định, lượng tử háo KV cache, chạy ở số thread tối ưu là 2 luồng.
